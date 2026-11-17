@@ -1,0 +1,9 @@
+# Boundary temperatures (K): left right bottom top
+1200 400 300 900
+# Initial interior temperature (K)
+300
+# Number of heat sources, then one line each:
+# x0 y0 x1 y1 (fractions of the plate, 0..1) and heat added per step (K)
+2
+0.20 0.20 0.35 0.30 0.02
+0.60 0.55 0.80 0.75 0.03
