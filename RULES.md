@@ -37,7 +37,8 @@ judge 是你們寫的程式，語言不限。它放在 repo 根目錄的 `judge/
 judge/judge CANDIDATE_DIR
 ```
 
-- 它可以使用 repo 裡的 `baseline/`、`inputs/`、`reference/`。路徑要從 `judge/judge` 自己的位置推算，因為助教會把整個 repo 複製到別的地方再執行。
+- 它可以使用 repo 裡的 `baseline/`、`inputs/`、`reference/`。路徑要從 `judge/judge` 自己的位置推算，不能寫死：助教評測時會從你們繳交的 branch 取一份新的，放在另一個目錄執行。
+- 評測時 `baseline/`、`inputs/`、`reference/` 會換回原版，所以不要靠修改它們來讓 judge 運作。
 - 輸出最後一行必須是 `ACCEPT` 或 `REJECT`。**建議在它的前一行印出判定原因**，例如哪一項檢查沒過、量到的數字是多少。
 - 只有完全合格的候選才能 `ACCEPT`，其他一律 `REJECT`。
 - 候選可能是惡意的：會作弊、會說謊、會想辦法騙過你的 judge。

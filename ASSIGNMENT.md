@@ -10,9 +10,30 @@
 | 時間 | 內容 |
 |---|---|
 | 2026/11/18 | 拿到程式、規則、這份說明，以及**只屬於你們這一隊的一組測試候選** |
-| 2026/12/2 | 交 judge 第一版 |
+| 2026/12/2 23:59 | 交 judge 第一版（push 到 `v1` branch） |
 | - | 修 judge、設計攻擊對方的測資 |
-| 2026/12/16 | 交最終版 judge 和 7 個攻擊測資 |
+| 2026/12/16 23:59 | 交最終版 judge 和 7 個攻擊測資（push 到 `final` branch） |
+
+## 繳交方式
+
+每隊有一個私人 repo，只有隊員和助教看得到：A 隊是 `NTHU-SC/hpcii-judge-A`，B 隊是 `NTHU-SC/hpcii-judge-B`。repo 要 clone 到 art 的哪裡都可以。
+
+- 平常在 `main` 開發。要繳交時，把要交的版本 push 到繳交用的 branch：
+  - 12/2 23:59 前 push 到 `v1`。
+  - 12/16 23:59 前 push 到 `final`。
+- 截止時間一到，助教會取下那個 branch 當下的版本並記錄 commit。之後再 push 都不算，截止前可以重複 push。
+- repo 的結構：
+
+  ```
+  judge/judge            12/2、12/16 都要交：judge 的入口
+  judge/README.md        12/16：judge 的使用方式
+  attacks/01/ … 07/      12/16：7 個攻擊候選，格式和 ~/testset 裡的一樣
+  attacks/labels.txt     12/16：每行一題，格式是「題號 判定 理由」，例如「01 ACCEPT 只把執行緒數改成 8」
+  REPORT.md              12/16：結果表和半頁說明
+  baseline/ inputs/ reference/ tools/   原本就有的，不要改
+  ```
+
+- 公開 repo（`NTHU-SC/hpcii-AI-workflow-homework`）是規則和說明的正本，有更新時用 `git pull upstream main` 合併進來。第一次先加 remote：`git remote add upstream git@github.com:NTHU-SC/hpcii-AI-workflow-homework.git`。
 
 ## 第一階段：到 12/2
 
@@ -28,9 +49,10 @@
 1. 先修好 judge，讓兩組候選都判對。
 2. 設計剛好 **7** 個測資來攻擊對方的 judge：
    - 每個測資是一個候選資料夾，附上你們認為的正確判定（`ACCEPT` 或 `REJECT`）和一句理由。
+   - 判定和理由寫在 `attacks/labels.txt`，**不要**放在候選資料夾裡：對方的 judge 讀得到候選資料夾裡的任何檔案。
    - 至少 1 個必須是應該 `ACCEPT` 的合格候選。
    - 判定有爭議時由助教裁定。
-3. 12/16 時 judge 和攻擊測資**同時**交給助教。之後就不能再改，只有交給助教的版本算數。
+3. judge 和攻擊測資**同時**在 12/16 23:59 截止，都以 `final` branch 為準。
 
 ## 計分（只是比賽）
 
@@ -40,10 +62,12 @@
 
 ## 12/16 要交的東西
 
-1. 最終版 judge（含使用方式）。
-2. 你們的 7 個攻擊測資（每個附判定和理由）。
-3. 結果表：所有你們跑過的候選、正確判定、你們 judge 的判定。
-4. 半頁說明：哪些候選曾經判錯、為什麼、怎麼修的。第一次就判對的話，寫一句就好。
+全部放在 `final` branch：
+
+1. 最終版 judge：`judge/`，使用方式寫在 `judge/README.md`。
+2. 7 個攻擊測資：`attacks/01/` 到 `attacks/07/`，判定和理由寫在 `attacks/labels.txt`。
+3. `REPORT.md` 裡的結果表：所有你們跑過的候選、正確判定、你們 judge 的判定。
+4. `REPORT.md` 裡的半頁說明：哪些候選曾經判錯、為什麼、怎麼修的。第一次就判對的話，寫一句就好。
 
 ## 提示
 
