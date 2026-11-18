@@ -29,6 +29,16 @@
 
 除此之外都可以改：程式碼、編譯器旗標、執行緒數（最多 8）、前置計算，`build.sh` 花多久都沒關係。
 
+## 候選不能做的事
+
+候選可以用任何手段騙 judge，但不能直接對 judge 本身動手：
+
+- 不能修改 `judge/` 底下的任何檔案。
+- 不能存取 judge 的 process，例如透過 `/proc/<pid>/` 讀寫它的記憶體或它開著的檔案，也不能 ptrace 它。候選自己的 stdout、stderr 照常使用。
+- 只能對自己啟動的 process 送 signal。`build.sh`、`run.sh` 結束時，它們啟動的 process 都必須已經結束。
+
+除此之外，候選在檔案、輸出、計時上動的任何手腳，都是 judge 要抓的。違反這幾條的攻擊測資怎麼算，見 `ASSIGNMENT.md`。
+
 ## Judge
 
 judge 是你們寫的程式，語言不限。它放在 repo 根目錄的 `judge/` 資料夾，入口是可執行檔 `judge/judge`：
